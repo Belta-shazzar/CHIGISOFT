@@ -4,8 +4,8 @@ import { transactionRecord } from "./transaction.details.service";
 import { StatusCodes } from "http-status-codes";
 import bcrypt from "bcryptjs";
 
-export const generateAccountNumber = () => {
-  return Math.floor(1000000000 + Math.random() * 9000000000);
+export const generateNumber = (rangeLength: number) => {
+  return Math.floor(10 + Math.random() * rangeLength);
 };
 
 export const encryptToken = async (transactionToken: string) => {
@@ -15,15 +15,15 @@ export const encryptToken = async (transactionToken: string) => {
 
 export const createAccount = async (userId: number, userName: string) => {
   try {
-    let accountNumber = (await generateAccountNumber()).toString();
-    const token = Math.floor(100000 + Math.random() * 900000).toString();
+    let accountNumber = (await generateNumber(9000000000)).toString();
+    const token = (await generateNumber(900000)).toString();
     const encryptedToken = await encryptToken(token);
     let account = await Account.findOne({
       where: { account_number: accountNumber },
     });
 
     if (account) {
-      accountNumber = generateAccountNumber().toString();
+      accountNumber = generateNumber(9000000000).toString();
     }
 
     account = await Account.create({
