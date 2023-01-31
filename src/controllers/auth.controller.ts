@@ -3,7 +3,6 @@ import { User } from "../entities/user.entity";
 import { StatusCodes } from "http-status-codes";
 import { createJWT } from "../middleware/jwt.setup";
 import { createAccount } from "../services/account.service";
-// import { encryptPassword } from "../services/auth.service";
 
 import bcrypt from "bcryptjs";
 

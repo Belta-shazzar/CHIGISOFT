@@ -4,7 +4,7 @@ import { transactionRecord } from "./transaction.details.service";
 import { StatusCodes } from "http-status-codes";
 import bcrypt from "bcryptjs";
 
-export const generateAccountNumber = async () => {
+export const generateAccountNumber = () => {
   return Math.floor(1000000000 + Math.random() * 9000000000);
 };
 
@@ -23,7 +23,7 @@ export const createAccount = async (userId: number, userName: string) => {
     });
 
     if (account) {
-      accountNumber = (await generateAccountNumber()).toString();
+      accountNumber = generateAccountNumber().toString();
     }
 
     account = await Account.create({
